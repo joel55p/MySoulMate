@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { connectNeo4j, closeNeo4j, runQuery } = require('../back-end/config/database');
+const { connectNeo4j, closeNeo4j, runQuery } = require('../config/database');
 
 // Intereses predefinidos por categorías
 const PREDEFINED_INTERESTS = {
@@ -52,15 +52,8 @@ async function initializeDatabase() {
     console.log('1️⃣ Conectando a Neo4j...');
     await connectNeo4j();
     
-    // Limpiar datos existentes (solo en desarrollo)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('\n2️⃣ Limpiando datos existentes (modo desarrollo)...');
-      await runQuery('MATCH (n) DETACH DELETE n');
-      console.log('🗑️ Base de datos limpiada');
-    }
-    
     // Crear intereses predefinidos
-    console.log('\n3️⃣ Creando intereses predefinidos...');
+    console.log('\n2️⃣ Creando intereses predefinidos...');
     let totalInterests = 0;
     
     for (const [category, interests] of Object.entries(PREDEFINED_INTERESTS)) {
@@ -79,7 +72,7 @@ async function initializeDatabase() {
     console.log(`✅ ${totalInterests} intereses creados`);
     
     // Crear nodos de universidades
-    console.log('\n4️⃣ Creando universidades...');
+    console.log('\n3️⃣ Creando universidades...');
     for (const university of UNIVERSITIES) {
       await runQuery(`
         MERGE (u:University {name: $name})
@@ -90,11 +83,14 @@ async function initializeDatabase() {
     
     // Crear usuarios de ejemplo (solo en desarrollo)
     if (process.env.NODE_ENV === 'development') {
-      console.log('\n5️⃣ Creando usuarios de ejemplo...');
+      console.log('\n4️⃣ Creando usuarios de ejemplo...');
+      
+      const bcrypt = require('bcryptjs');
+      const { v4: uuidv4 } = require('uuid');
       
       const sampleUsers = [
         {
-          id: 'user-1',
+          id: uuidv4(),
           name: 'Ana García',
           email: 'ana.garcia@uvg.edu.gt',
           age: 20,
@@ -104,7 +100,7 @@ async function initializeDatabase() {
           interests: ['Programación', 'Música', 'Lectura', 'Yoga']
         },
         {
-          id: 'user-2',
+          id: uuidv4(),
           name: 'Carlos López',
           email: 'carlos.lopez@url.edu.gt',
           age: 22,
@@ -114,7 +110,7 @@ async function initializeDatabase() {
           interests: ['Psicología', 'Fotografía', 'Senderismo', 'Cine']
         },
         {
-          id: 'user-3',
+          id: uuidv4(),
           name: 'María Rodríguez',
           email: 'maria.rodriguez@unis.edu.gt',
           age: 21,
@@ -124,6 +120,8 @@ async function initializeDatabase() {
           interests: ['Diseño Gráfico', 'Arte Digital', 'Fotografía', 'Viajes']
         }
       ];
+      
+      const hashedPassword = await bcrypt.hash('password123', 12);
       
       for (const user of sampleUsers) {
         // Crear usuario
@@ -145,7 +143,7 @@ async function initializeDatabase() {
           })
         `, {
           ...user,
-          hashedPassword: '$2b$12$dummyHashForDevelopment' // Hash dummy para desarrollo
+          hashedPassword
         });
         
         // Conectar con intereses
@@ -162,7 +160,7 @@ async function initializeDatabase() {
     }
     
     // Verificar la inicialización
-    console.log('\n6️⃣ Verificando inicialización...');
+    console.log('\n5️⃣ Verificando inicialización...');
     const stats = await runQuery(`
       MATCH (u:User) 
       OPTIONAL MATCH (i:Interest)
@@ -196,26 +194,5 @@ async function initializeDatabase() {
   }
 }
 
-// Función para mostrar ayuda
-function showHelp() {
-  console.log('MySoulMate - Inicialización de Base de Datos');
-  console.log('');
-  console.log('Uso:');
-  console.log('  npm run init-db              # Inicializar base de datos');
-  console.log('  npm run init-db -- --help    # Mostrar esta ayuda');
-  console.log('  npm run init-db -- --clean   # Limpiar y reinicializar');
-  console.log('');
-  console.log('Variables de entorno requeridas:');
-  console.log('  NEO4J_URI      # URI de conexión a Neo4j');
-  console.log('  NEO4J_USERNAME # Usuario de Neo4j');
-  console.log('  NEO4J_PASSWORD # Contraseña de Neo4j');
-}
-
-// Ejecutar según argumentos
-const args = process.argv.slice(2);
-
-if (args.includes('--help')) {
-  showHelp();
-} else {
-  initializeDatabase();
-}
+// Ejecutar inicialización
+initializeDatabase();
