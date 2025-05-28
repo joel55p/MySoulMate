@@ -715,6 +715,99 @@ const deleteAccount = async (req, res) => {
   }
 };
 
+// Verificar disponibilidad de email
+const checkEmailAvailability = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        error: 'Email requerido',
+        details: 'Debes proporcionar un email para verificar'
+      });
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        error: 'Formato de email inválido',
+        details: 'Ingresa un email válido'
+      });
+    }
+
+    // Verificar si existe
+    const existingUserQuery = `
+      MATCH (u:User {email: $email})
+      RETURN u
+    `;
+
+    const result = await runQuery(existingUserQuery, { email });
+    const isAvailable = result.records.length === 0;
+
+    res.json({
+      success: true,
+      available: isAvailable,
+      message: isAvailable ? 'Email disponible' : 'Email ya registrado'
+    });
+
+  } catch (error) {
+    console.error('Error verificando email:', error);
+    res.status(500).json({
+      error: 'Error interno del servidor',
+      details: 'No se pudo verificar el email'
+    });
+  }
+};
+
+// Obtener estadísticas del usuario (para dashboard)
+const getUserStats = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const statsQuery = `
+      MATCH (u:User {id: $userId})
+      OPTIONAL MATCH (u)-[:LIKES]->(interests:Interest)
+      OPTIONAL MATCH (u)-[:MATCHED_WITH]-(matches:User)
+      OPTIONAL MATCH (u)-[:VIEWED]-(views:User)
+      OPTIONAL MATCH (u)<-[:VIEWED]-(profileViews:User)
+      RETURN u.name as name,
+             count(DISTINCT interests) as interestsCount,
+             count(DISTINCT matches) as matchesCount,
+             count(DISTINCT views) as viewsCount,
+             count(DISTINCT profileViews) as profileViewsCount
+    `;
+
+    const result = await runQuery(statsQuery, { userId });
+    
+    if (result.records.length === 0) {
+      return res.status(404).json({
+        error: 'Usuario no encontrado'
+      });
+    }
+
+    const stats = result.records[0].toObject();
+
+    res.json({
+      success: true,
+      stats: {
+        name: stats.name,
+        interests: stats.interestsCount.toNumber(),
+        matches: stats.matchesCount.toNumber(),
+        views: stats.viewsCount.toNumber(),
+        profileViews: stats.profileViewsCount.toNumber()
+      }
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo estadísticas:', error);
+    res.status(500).json({
+      error: 'Error interno del servidor',
+      details: 'No se pudieron obtener las estadísticas'
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -724,6 +817,8 @@ module.exports = {
   changePassword,
   logout,
   deleteAccount,
+  checkEmailAvailability,
+  getUserStats,
   generateToken,
   verifyToken
 };
