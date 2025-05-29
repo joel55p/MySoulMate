@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil — My SoulMate</title>
+
+    <!-- CSS exclusivo del perfil -->
+    <link rel="stylesheet" href="css/profile.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- vuelve al home manualmente con el logo -->
+            <div class="logo" onclick="location.href='index.html'">My SoulMate</div>
+        </header>
+
+        <div class="profile-card">
+            <!-- encabezado de la tarjeta -->
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-name" id="profileName">Joel Nerio</div>
+                <div class="profile-details">
+                    <div id="profileAge">20 años</div>
+                    <div id="profileGender">Hombre</div>
+                </div>
+            </div>
+
+            <!-- cuerpo con atributos -->
+            <div class="profile-content">
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎵</span>
+                        Género musical favorito:
+                    </div>
+                    <div class="attribute-value" id="musicalGenre">
+                        Pop, Rock Alternativo, Indie
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎬</span>
+                        Entretenimiento preferido:
+                    </div>
+                    <div class="attribute-value" id="entertainment">
+                        Series de Netflix, Películas de comedia, Documentales
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🏃‍♀️</span>
+                        Actividades físicas:
+                    </div>
+                    <div class="attribute-value" id="physicalActivities">
+                        Yoga, Correr, Natación
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎨</span>
+                        Hobbies principales:
+                    </div>
+                    <div class="attribute-value" id="hobbies">
+                        Leer, Fotografía, Cocinar, Viajar
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">💕</span>
+                        Valora más en una relación:
+                    </div>
+                    <div class="attribute-value" id="relationshipValues">
+                        Comunicación, Confianza, Apoyo mutuo
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🌟</span>
+                        Fin de semana ideal:
+                    </div>
+                    <div class="attribute-value" id="idealWeekend">
+                        Explorar lugares nuevos, tiempo con amigos, relajarse en casa
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">💬</span>
+                        Conversaciones favoritas:
+                    </div>
+                    <div class="attribute-value" id="conversationStyle">
+                        Temas profundos, Experiencias personales, Planes futuros
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">👥</span>
+                        Vida social:
+                    </div>
+                    <div class="attribute-value" id="socialLife">
+                        Grupo pequeño de amigos cercanos, actividades ocasionales
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in centered-last">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎯</span>
+                        Busca en una relación:
+                    </div>
+                    <div class="attribute-value" id="relationshipGoals">
+                        Conexión emocional, Crecimiento mutuo, Relación seria
+                    </div>
+                </div>                
+            </div>
+
+            <!-- botones -->
+            <div class="action-buttons">
+                <button class="action-btn btn-not-interested"
+                        onclick="handleNotInterested(event)">❌ No estoy interesado</button>
+                <button class="action-btn btn-interested"
+                        onclick="handleInterested(event)">✅ Estoy interesado</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js" defer></script>
+</body>
+</html>
