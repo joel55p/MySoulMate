@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     loadConnections();
 });
 
+// Función para obtener avatar basado en género
+function getAvatarByGender(gender) {
+    if (gender.toLowerCase().includes('mujer') || gender.toLowerCase().includes('femenino') || gender.toLowerCase().includes('female')) {
+        return '👩';
+    } else if (gender.toLowerCase().includes('hombre') || gender.toLowerCase().includes('masculino') || gender.toLowerCase().includes('male')) {
+        return '👨';
+    } else {
+        return '👤'; // Avatar genérico como fallback
+    }
+}
+
 // botones de interés/no-interés
 function handleInterested(event) {
     const btn = event.currentTarget;
@@ -153,7 +164,7 @@ function renderConnections(connections) {
     
     connectionsList.innerHTML = connections.map(connection => `
         <div class="connection-item" onclick="viewConnectionProfile(${connection.id})">
-            <div class="connection-avatar">${connection.avatar}</div>
+            <div class="connection-avatar">${getAvatarByGender(connection.gender)}</div>
             <div class="connection-info">
                 <div class="connection-name">${connection.name}</div>
                 <div class="connection-details">${connection.age} años • ${connection.gender}</div>

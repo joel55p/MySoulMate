@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(showConfetti, 1000);
 });
 
+// Función para obtener avatar basado en género
+function getAvatarByGender(gender) {
+    if (gender.toLowerCase().includes('mujer') || gender.toLowerCase().includes('femenino') || gender.toLowerCase().includes('female')) {
+        return '👩';
+    } else if (gender.toLowerCase().includes('hombre') || gender.toLowerCase().includes('masculino') || gender.toLowerCase().includes('male')) {
+        return '👨';
+    } else {
+        return '👤'; // Avatar genérico como fallback
+    }
+}
+
+
 // Función para cargar los datos del match
 function loadMatchData() {
     // TODO: AQUÍ SE DEBE HACER LA CONSULTA A LA BASE DE DATOS
@@ -28,7 +40,6 @@ function loadMatchData() {
         name: "María González",
         age: 23,
         gender: "Mujer",
-        avatar: "👩",
         instagramHandle: "@maria_gonzalez23",
         profile: {
             musicalGenre: "Pop Latino, Reggaeton, Balada",
@@ -56,7 +67,7 @@ function updateMatchProfile(matchData) {
     
     // Actualizar avatar si es necesario
     const avatar = document.querySelector('.profile-avatar');
-    avatar.textContent = matchData.avatar;
+    avatar.textContent = getAvatarByGender(matchData.gender);
     
     // Actualizar atributos del perfil
     document.getElementById('musicalGenre').textContent = matchData.profile.musicalGenre;
