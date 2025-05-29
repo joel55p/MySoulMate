@@ -336,6 +336,29 @@
     flex-shrink: 0;
 }
 
+.input-with-prefix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-prefix {
+    position: absolute;
+    left: 12px;
+    color: #666;
+    font-weight: 500;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.form-input.with-prefix {
+    padding-left: 28px;
+}
+
+.form-input.with-prefix:focus + .input-prefix,
+.form-input.with-prefix:not(:placeholder-shown) + .input-prefix {
+    color: var(--primary-color, #6366f1);
+}
 .checkbox-label input[type="checkbox"]:checked + .checkbox-checkmark {
     background: linear-gradient(45deg, #667eea, #764ba2);
     border-color: #667eea;
