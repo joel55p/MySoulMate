@@ -92,7 +92,44 @@
                             >
                             <div class="input-error" id="ageError"></div>
                         </div>
+
+                     <!-- Redes Sociales -->
+                        <div class="form-group">
+                            <label for="instagram" class="form-label">Usuario de Instagram</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">@</span>
+                                <input 
+                                    type="text" 
+                                    id="instagram" 
+                                    name="instagram" 
+                                    class="form-input with-prefix" 
+                                    placeholder="tu_usuario_instagram"
+                                    maxlength="30"
+                                    pattern="^[a-zA-Z0-9._]{1,30}$"
+                                >
+                            </div>
+                            <div class="input-help">Opcional - Ayuda a otros usuarios a encontrarte</div>
+                            <div class="input-error" id="instagramError"></div>
+
+
+
+
+
+                        <!-- Genero -->
+                        <div class="form-group">
+                            <label for="gender" class="form-label">Género *</label>
+                            <select id="gender" name="gender" class="form-select" required>
+                                <option value="">Selecciona tu género</option>
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                            </select>
+                            <div class="input-error" id="genderError"></div>
                     </div>
+
+                    
+
+
+
 
                     <!-- Información Académica -->
                     <div class="form-section">
@@ -465,6 +502,41 @@
                 showFieldError('ageConfirmError', 'Debes confirmar que eres mayor de edad');
                 isValid = false;
             }
+            // Validar Instagram (opcional pero si se proporciona debe ser válido)
+            if (data.instagram && data.instagram.trim()) {
+                const instagramRegex = /^[a-zA-Z0-9._]{1,30}$/;
+                const instagram = data.instagram.trim();
+                
+                if (!instagramRegex.test(instagram)) {
+                    showFieldError('instagramError', 'El usuario de Instagram solo puede contener letras, números, puntos y guiones bajos');
+                    isValid = false;
+                }
+                
+                if (instagram.length < 1 || instagram.length > 30) {
+                    showFieldError('instagramError', 'El usuario debe tener entre 1 y 30 caracteres');
+                    isValid = false;
+                }
+                
+                // Verificar que no empiece o termine con punto
+                if (instagram.startsWith('.') || instagram.endsWith('.')) {
+                    showFieldError('instagramError', 'El usuario no puede empezar o terminar con punto');
+                    isValid = false;
+                }
+                
+                // Verificar que no tenga puntos consecutivos
+                if (instagram.includes('..')) {
+                    showFieldError('instagramError', 'El usuario no puede tener puntos consecutivos');
+                    isValid = false;
+                }
+            }
+            // Validar género
+                if (!data.gender) {
+                    showFieldError('genderError', 'Selecciona tu género');
+                    isValid = false;
+                } else if (data.gender !== 'Hombre' && data.gender !== 'Mujer') {
+                    showFieldError('genderError', 'Selecciona una opción válida');
+                    isValid = false;
+                }
 
             return isValid;
         }
