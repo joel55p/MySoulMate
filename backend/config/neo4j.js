@@ -14,7 +14,6 @@ class Neo4jConnection {
                 neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD),
                 {
                     // Configuraciones adicionales para Aura
-                    encrypted: 'ENCRYPTION_ON',
                     connectionTimeout: 30000,
                     maxConnectionLifetime: 3 * 60 * 60 * 1000, // 3 horas
                     maxConnectionPoolSize: 50,
