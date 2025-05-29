@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario - MySoulMate</title>
+     <link rel="stylesheet" href="css/ques1.css">
+    
+    </style>
+</head>
+<body>
+    <!-- Header simplificado -->
+    <header class="auth-header">
+        <nav class="auth-nav">
+            <div class="logo" onclick="window.location.href='index.html'">MySoulMate</div>
+            <div class="auth-links">
+                <a href="login.html" class="auth-link">Iniciar sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header-content">
+                    <h1 class="auth-title">Cuestionario de Compatibilidad</h1>
+                    <p class="auth-subtitle">💫 Ayúdanos a encontrar tu match perfecto 💫</p>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <div class="progress-step completed">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Información básica</div>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step active">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Cuestionario</div>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">¡Listo!</div>
+                    </div>
+                </div>
+
+                <form id="questionnaireForm" class="questionnaire-form">
+                    
+                    <!-- Música -->
+                    <div class="question-section">
+                        <h3 class="question-title">🎵 Géneros Musicales</h3>
+                        <p class="question-subtitle">¿Qué géneros musicales te gustan más? (Selección múltiple - máximo 3)</p>
+                        
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Pop Internacional" data-section="music">
+                                    Pop Internacional
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Reggaetón" data-section="music">
+                                    Reggaetón
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Rock/Rock Alternativo" data-section="music">
+                                    Rock/Rock Alternativo
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Salsa/Bachata" data-section="music">
+                                    Salsa/Bachata
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Electrónica/EDM" data-section="music">
+                                    Electrónica/EDM
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Hip Hop/Rap" data-section="music">
+                                    Hip Hop/Rap
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Indie/Indie Pop" data-section="music">
+                                    Indie/Indie Pop
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Salsa/Merengue" data-section="music">
+                                    Salsa/Merengue
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Jazz/Blues" data-section="music">
+                                    Jazz/Blues
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Música Clásica" data-section="music">
+                                    Música Clásica
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Folk/Acústico" data-section="music">
+                                    Folk/Acústico
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="Trap/Drill" data-section="music">
+                                    Trap/Drill
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="music" value="K-Pop/J-Pop" data-section="music">
+                                    K-Pop/J-Pop
+                                </label>
+                            </div>
+
+
+                        </div>
+                        
+                       
+                        
+                        <div class="selection-counter" id="music-counter">0/3 seleccionados</div>
+                    </div>
+
+                    <!-- Películas/Series -->
+                    <div class="question-section">
+                        <h3 class="question-title">🎬 Películas/Series</h3>
+                        <p class="question-subtitle">¿Qué géneros de entretenimiento prefieres? (Selección múltiple - máximo 3)</p>
+                        
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Comedias" data-section="entertainment">
+                                    Comedias
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Drama/Romance" data-section="entertainment">
+                                    Drama/Romance
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Acción/Aventura" data-section="entertainment">
+                                    Acción/Aventura
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Terror/Suspenso" data-section="entertainment">
+                                    Terror/Suspenso
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Ciencia Ficción" data-section="entertainment">
+                                    Ciencia Ficción
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Documentales" data-section="entertainment">
+                                    Documentales
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Anime/Animación" data-section="entertainment">
+                                   Anime/Animación
+
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Series de Crimen/Thriller" data-section="entertainment">
+                                  Series de Crimen/Thriller
+
+                                </label>
+                            </div>
+                            
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Reality Shows" data-section="entertainment">
+                                  Reality Shows
+
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Superhéroes/Marvel/DC" data-section="entertainment">
+                                  Superhéroes/Marvel/DC
+
+                                </label>
+                            </div>
+
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Películas Clásicas" data-section="entertainment">
+                                 Películas Clásicas
+
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="entertainment" value="Contenido Internacional (K-Dramas, etc.)" data-section="entertainment">
+                                 Contenido Internacional (K-Dramas, etc.)
+
+
+                                </label>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        
+                        <div class="selection-counter" id="entertainment-counter">0/3 seleccionados</div>
+                    </div>
+
+                    <!-- Deportes -->
+                    <div class="question-section">
+                        <h3 class="question-title">⚽ Actividades/Deportes</h3>
+                        <p class="question-subtitle">¿Qué actividades físicas o deportes practicas/sigues? (Selección múltiple - máximo 4)</p>
+                        
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Fútbol" data-section="sports">
+                                    Fútbol
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Basketball" data-section="sports">
+                                    Basketball
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Natación" data-section="sports">
+                                    Natación
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Gimnasio/Fitness" data-section="sports">
+                                    Gimnasio/Fitness
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Tenis/Padel" data-section="sports">
+                                    Tenis/padel
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Ciclismo" data-section="sports">
+                                    Ciclismo
+                                </label>
+                            </div>
+
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Running/Atletismo" data-section="sports">
+                                    Running/Atletismo
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Volleyball" data-section="sports">
+                                    Volleyball
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Yoga/Pilates" data-section="sports">
+                                   Yoga/Pilates
+
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Hiking/Montañismo" data-section="sports">
+                                   Hiking/Montañismo
+
+                                </label>
+                            </div>
+
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Videojuegos/Esports" data-section="sports">
+                                   Videojuegos/Esports
+
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Baile/Danza" data-section="sports">
+                                   Baile/Danza
+
+                                </label>
+                            </div>
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="sports" value="Ninguna (Sedentario)" data-section="sports">
+                                   Ninguna (Sedentario)
+
+
+                                </label>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        
+                       
+                        
+                        <div class="selection-counter" id="sports-counter">0/4 seleccionados</div>
+                    </div>
+
+                    <!-- Hobbies -->
+                    <div class="question-section">
+                        <h3 class="question-title">🎨 Hobbies/Intereses</h3>
+                        <p class="question-subtitle">¿Cuáles son tus principales hobbies? (Selección múltiple - máximo 4)</p>
+                        
+                        <div class="options-grid">
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Leer/Literatura" data-section="hobbies">
+                                    Leer/Literatura
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Cocinar/Gastronomía" data-section="hobbies">
+                                    Cocinar/Gastronomía
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Fotografía" data-section="hobbies">
+                                    Fotografía
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Tecnología/Gaming" data-section="hobbies">
+                                    Tecnología/Gaming
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Arte/Dibujo/Pintura" data-section="hobbies">
+                                    Arte/Dibujo/Pintura
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Viajar/Conocer lugares" data-section="hobbies">
+                                   Viajar/Conocer lugares
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Aprender idiomas" data-section="hobbies">
+                                   Aprender idiomas
+                                </label>
+                            </div>
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Voluntariado/Causas sociales" data-section="hobbies">
+                                   Voluntariado/Causas sociales
+
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Tocar instrumentos" data-section="hobbies">
+                                   Tocar instrumentos
+
+                                </label>
+                            </div>
+                             <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Escritura creativa" data-section="hobbies">
+                                   Escritura creativa
+
+
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value="Jardinería/Plantas" data-section="hobbies">
+                                   Jardinería/Plantas
+
+
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <label class="option-label">
+                                    <input type="checkbox" class="option-checkbox" name="hobbies" value=" Coleccionar cosas" data-section="hobbies">
+                                   Coleccionar cosas
+
+
+                                </label>
+                            </div>
+                        </div>
+                        
+                    
+                        <div class="selection-counter" id="hobbies-counter">0/4 seleccionados</div>
+                    </div>
+
+                    <!-- Personalidad/Valores -->
+                    <div class="question-section">
+                        <h3 class="question-title">💝 Personalidad/Valores</h3>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <p class="question-subtitle">En una relación, ¿qué valoras más?</p>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_values" value="Comunicación abierta">
+                                        Comunicación abierta
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_values" value="Diversión y aventura">
+                                        Diversión y aventura
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_values" value="Estabilidad y confianza">
+                                        Estabilidad y confianza
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_values" value="Crecimiento mutuo">
+                                        Crecimiento mutuo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <p class="question-subtitle">¿Cómo prefieres pasar un fin de semana ideal?</p>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="weekend_preference" value="En casa relajándome">
+                                        En casa relajándome
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="weekend_preference" value="Saliendo con amigos">
+                                        Saliendo con amigos
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="weekend_preference" value="Explorando lugares nuevos">
+                                        Explorando lugares nuevos
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="weekend_preference" value="Haciendo actividades al aire libre">
+                                        Haciendo actividades al aire libre
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="question-subtitle">¿Qué tipo de conversaciones disfrutas más?</p>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="conversation_style" value="Temas profundos y filosóficos">
+                                        Temas profundos y filosóficos
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="conversation_style" value="Planes y aventuras futuras">
+                                        Planes y aventuras futuras
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="conversation_style" value="Humor y bromas">
+                                        Humor y bromas
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="conversation_style" value="Intereses compartidos">
+                                        Intereses compartidos
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estilo de Vida -->
+                    <div class="question-section">
+                        <h3 class="question-title">🌟 Estilo de Vida</h3>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <p class="question-subtitle">¿Cómo describes tu vida social?</p>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="social_life" value="Muy social, siempre con planes">
+                                        Muy social, siempre con planes
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="social_life" value="Selectivo con mis círculos cercanos">
+                                        Selectivo con mis círculos cercanos
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="social_life" value="Me gusta el equilibrio social/personal">
+                                        Me gusta el equilibrio social/personal
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="social_life" value="Prefiero tiempo en soledad">
+                                         Prefiero tiempo en soledad
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="question-subtitle">¿Qué buscas en una relación?</p>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_goal" value="Algo casual y divertido">
+                                        Algo casual y divertido
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_goal" value="Relación seria a largo plazo">
+                                        Relación seria a largo plazo
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_goal" value="Primero amistad, luego veremos">
+                                        Primero amistad, luego veremos
+                                    </label>
+                                </div>
+                                 <div class="option-item">
+                                    <label class="option-label">
+                                        <input type="radio" class="option-radio" name="relationship_goal" value="Estoy abierto a cualquier conexión">
+                                        Estoy abierto a cualquier conexión
+                                    </label>
+                                </div>
+                            </div>
+                        </div>  
