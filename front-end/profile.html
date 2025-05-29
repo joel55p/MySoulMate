@@ -13,6 +13,11 @@
         <header class="header">
             <!-- vuelve al home manualmente con el logo -->
             <div class="logo" onclick="location.href='index.html'">My SoulMate</div>
+            <!-- botón de conexiones -->
+            <button class="connections-btn" onclick="toggleConnections()">
+                <span class="connections-icon"> 🔗</span>
+                Conexiones
+            </button>
         </header>
 
         <div class="profile-card">
@@ -125,6 +130,20 @@
                         onclick="handleNotInterested(event)">❌ No estoy interesado</button>
                 <button class="action-btn btn-interested"
                         onclick="handleInterested(event)">✅ Estoy interesado</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de conexiones -->
+    <div class="connections-modal" id="connectionsModal">
+        <div class="connections-overlay" onclick="closeConnections()"></div>
+        <div class="connections-content">
+            <div class="connections-header">
+                <h2>Mis Conexiones</h2>
+                <button class="close-btn" onclick="closeConnections()">✕</button>
+            </div>
+            <div class="connections-list" id="connectionsList">
+                <!-- Las conexiones se cargarán aquí dinámicamente -->
             </div>
         </div>
     </div>
