@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = 5000;
 
+
 // Middleware básico
 app.use(cors());
 app.use(express.json());
