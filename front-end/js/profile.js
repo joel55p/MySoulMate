@@ -1,4 +1,3 @@
-// animación escalonada de aparición
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-in').forEach((el, i) => {
         el.style.animationDelay = `${i * 0.1}s`;
@@ -13,13 +12,35 @@ function handleInterested(event) {
     const btn = event.currentTarget;
     btn.classList.add('btn-loading');
     btn.innerHTML = '💖 Procesando…';
+    
+    // TODO: AQUÍ SE DEBE HACER LA CONSULTA A LA BASE DE DATOS
+    // Consulta SQL sugerida para verificar si hay match:
+    // INSERT INTO matches (user1_id, user2_id, user1_interested, created_at) 
+    // VALUES ([CURRENT_USER_ID], [PROFILE_USER_ID], true, NOW())
+    // ON DUPLICATE KEY UPDATE user1_interested = true;
+    // 
+    // Luego verificar si es match mutuo:
+    // SELECT * FROM matches 
+    // WHERE ((user1_id = [CURRENT_USER_ID] AND user2_id = [PROFILE_USER_ID]) 
+    //    OR (user1_id = [PROFILE_USER_ID] AND user2_id = [CURRENT_USER_ID]))
+    // AND user1_interested = true AND user2_interested = true
+    
     setTimeout(() => {
-        alert('¡Match potencial registrado!');
-        btn.classList.remove('btn-loading');
-        btn.innerHTML = '✅ Estoy interesado';
+        const isMatch = Math.random() > 0.7; 
         
-        // Recargar conexiones después de mostrar interés
-        loadConnections();
+        if (isMatch) {
+            alert('¡MATCH! 💖');
+            // TODO: Reemplazar con el ID real del usuario del perfil
+            window.location.href = 'match.html?id=1';
+        } else {
+            // Solo interés registrado, no match aún
+            alert('¡Match potencial registrado!');
+            btn.classList.remove('btn-loading');
+            btn.innerHTML = '✅ Estoy interesado';
+            
+            // Recargar conexiones después de mostrar interés
+            loadConnections();
+        }
     }, 1500);
 }
 
@@ -27,10 +48,20 @@ function handleNotInterested(event) {
     const btn = event.currentTarget;
     btn.classList.add('btn-loading');
     btn.innerHTML = '❌ Procesando…';
+    
+    // TODO: AQUÍ SE DEBE HACER LA CONSULTA A LA BASE DE DATOS
+    // Consulta SQL sugerida:
+    // INSERT INTO matches (user1_id, user2_id, user1_interested, created_at) 
+    // VALUES ([CURRENT_USER_ID], [PROFILE_USER_ID], false, NOW())
+    // ON DUPLICATE KEY UPDATE user1_interested = false;
+    
     setTimeout(() => {
         alert('Perfil descartado, mostrando siguiente…');
         btn.classList.remove('btn-loading');
         btn.innerHTML = '❌ No estoy interesado';
+        
+        // TODO: Aquí podrías cargar el siguiente perfil automáticamente
+        // loadNextProfile();
     }, 1000);
 }
 
@@ -141,9 +172,10 @@ function viewConnectionProfile(connectionId) {
     // SELECT * FROM users WHERE id = [connectionId]
     
     console.log(`Ver perfil de conexión ID: ${connectionId}`);
-    // Redirigir a la página de perfil de la conexión
-    // window.location.href = `profile.html?id=${connectionId}`;
     
-    // Por ahora solo mostrar alerta
-    alert(`Viendo perfil de conexión ID: ${connectionId}`);
+    // Opción 1: Ir a la página de match si ya es un match confirmado
+    window.location.href = `match.html?id=${connectionId}`;
+    
+    // Opción 2: O podrías ir a una página de perfil de solo lectura
+    // window.location.href = `profile.html?id=${connectionId}&view=readonly`;
 }

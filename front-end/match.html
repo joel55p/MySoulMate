@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¡Match! — My SoulMate</title>
+    <link rel="stylesheet" href="css/match.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- Botón de regreso -->
+            <button class="back-btn" onclick="location.href='profile.html'">
+                <span class="back-icon">←</span>
+                Volver
+            </button>
+            <div class="logo">My SoulMate</div>
+        </header>
+
+        <!-- Mensaje de felicitación -->
+        <div class="match-celebration">
+            <div class="celebration-icon">💖</div>
+            <h1 class="celebration-title">¡Felicitaciones!</h1>
+            <p class="celebration-subtitle">Matcheaste con:</p>
+        </div>
+
+        <div class="profile-card">
+            <!-- Encabezado de la tarjeta -->
+            <div class="profile-header">
+                <div class="profile-avatar">👩</div>
+                <div class="profile-name" id="matchName">María González</div>
+                <div class="profile-details">
+                    <div id="matchAge">23 años</div>
+                    <div id="matchGender">Mujer</div>
+                </div>
+            </div>
+
+            <!-- Cuerpo con atributos -->
+            <div class="profile-content">
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎵</span>
+                        Género musical favorito:
+                    </div>
+                    <div class="attribute-value" id="musicalGenre">
+                        Pop Latino, Reggaeton, Balada
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎬</span>
+                        Entretenimiento preferido:
+                    </div>
+                    <div class="attribute-value" id="entertainment">
+                        Películas románticas, Series de drama, Reality shows
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🏃‍♀️</span>
+                        Actividades físicas:
+                    </div>
+                    <div class="attribute-value" id="physicalActivities">
+                        Bailar, Pilates, Caminatas
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎨</span>
+                        Hobbies principales:
+                    </div>
+                    <div class="attribute-value" id="hobbies">
+                        Pintura, Jardinería, Escribir, Moda
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">💕</span>
+                        Valora más en una relación:
+                    </div>
+                    <div class="attribute-value" id="relationshipValues">
+                        Honestidad, Respeto, Diversión compartida
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🌟</span>
+                        Fin de semana ideal:
+                    </div>
+                    <div class="attribute-value" id="idealWeekend">
+                        Brunch con amigas, ir de compras, película en casa
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">💬</span>
+                        Conversaciones favoritas:
+                    </div>
+                    <div class="attribute-value" id="conversationStyle">
+                        Historias divertidas, Sueños y metas, Consejos de vida
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">👥</span>
+                        Vida social:
+                    </div>
+                    <div class="attribute-value" id="socialLife">
+                        Muy sociable, le gusta conocer gente nueva
+                    </div>
+                </div>
+                
+                <div class="attribute-section fade-in centered-last">
+                    <div class="attribute-label">
+                        <span class="attribute-icon">🎯</span>
+                        Busca en una relación:
+                    </div>
+                    <div class="attribute-value" id="relationshipGoals">
+                        Compañía especial, Aventuras juntos, Amor verdadero
+                    </div>
+                </div>                
+            </div>
+
+            <!-- Mensaje de Instagram -->
+            <div class="instagram-section">
+                <div class="instagram-message">
+                    <span class="instagram-icon">📱</span>
+                    <div class="instagram-text">
+                        <p>Comienza a hablar con <strong id="instagramName">María</strong> en Instagram:</p>
+                        <a href="#" class="instagram-handle" id="instagramHandle">@maria_gonzalez23</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/match.js" defer></script>
+</body>
+</html>
