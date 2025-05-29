@@ -23,6 +23,36 @@
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
+/* Contenedor centrado */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem; /* Espacio arriba si lo necesitas */
+}
+
+/* Botón con estilo */
+.btn-continuar {
+  background: linear-gradient(to right, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-continuar:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn-continuar:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
 
         .auth-nav {
             display: flex;
