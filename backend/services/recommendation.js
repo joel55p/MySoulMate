@@ -1,26 +1,14 @@
 const neo4jConnection = require('../config/neo4j');
 
-/**
- * ALGORITMO DE RECOMENDACIÓN: Similitud de Coseno con Pesos
- * 
- * Cómo funciona:
- * 1. Obtiene todos los usuarios que han completado el cuestionario
- * 2. Calcula similitud basada en:
- *    - Intereses comunes (música, entretenimiento, deportes, hobbies)
- *    - Preferencias de personalidad (valores, estilo de vida)
- * 3. Aplica filtros (género, universidad, edad)
- * 4. Calcula puntuación final con pesos específicos
- * 5. Retorna matches ordenados por compatibilidad
- */
 
 class RecommendationService {
     constructor() {
         // Pesos para diferentes aspectos de compatibilidad
         this.weights = {
-            interests: 0.4,        // 40% - Intereses comunes
-            personality: 0.35,     // 35% - Compatibilidad de personalidad  
-            demographics: 0.15,    // 15% - Factores demográficos
-            university: 0.10       // 10% - Misma universidad
+            interests: 0.4,        
+            personality: 0.35,     
+            demographics: 0.15,    
+            university: 0.10       
         };
         
         // Categorías de intereses y sus pesos relativos
