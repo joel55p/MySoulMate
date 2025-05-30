@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Login - MySoulMate{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">Welcome Back!</h2>
+        <p class="text-gray-600 mt-2">Sign in to continue your journey</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.login') }}">
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                University Email
+            </label>
+            <input type="email" 
+                   id="email" 
+                   name="email" 
+                   required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                   placeholder="your.email@uvg.edu.gt">
+        </div>
+
+        <div class="mb-6">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                Password
+            </label>
+            <input type="password" 
+                   id="password" 
+                   name="password" 
+                   required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                   placeholder="Enter your password">
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-300">
+            Sign In
+        </button>
+    </form>
+
+    <div class="mt-6 text-center">
+        <p class="text-gray-600">
+            Don't have an account? 
+            <a href="{{ url_for('auth.register') }}" class="text-purple-600 hover:text-purple-800 font-medium">
+                Sign up here
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock %}

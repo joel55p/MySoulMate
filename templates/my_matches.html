@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}My Matches - MySoulMate{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Your Matches 💕</h1>
+        <p class="text-gray-600">People you've connected with</p>
+    </div>
+
+    {% if matches %}
+        <!-- Matches Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for match in matches %}
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
+                    <!-- Profile Picture Placeholder -->
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl">
+                        👤
+                    </div>
+
+                    <!-- Match Info -->
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ match.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ match.age }} años</p>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-700 text-sm mb-6 line-clamp-3">{{ match.description }}</p>
+                    
+                    <!-- Action Button -->
+                    <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition duration-300">
+                        Start Conversation
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Stats -->
+        <div class="text-center bg-white rounded-lg p-6 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">🎯 Match Statistics</h2>
+            <p class="text-gray-600">
+                You have <span class="font-bold text-purple-600">{{ matches|length }}</span> 
+                {{ 'match' if matches|length == 1 else 'matches' }}!
+            </p>
+        </div>
+
+    {% else %}
+        <!-- No Matches State -->
+        <div class="text-center py-16">
+            <div class="text-6xl mb-6">💔</div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">No matches yet</h2>
+            <p class="text-gray-600 mb-8">
+                Start swiping to find people who share your interests!
+            </p>
+            
+            <a href="{{ url_for('matches.index') }}" 
+               class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition duration-300">
+                Discover People
+            </a>
+        </div>
+    {% endif %}
+
+    <!-- Back to Dashboard -->
+    <div class="text-center">
+        <a href="{{ url_for('main.dashboard') }}" 
+           class="text-purple-600 hover:text-purple-800 font-medium">
+            ← Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

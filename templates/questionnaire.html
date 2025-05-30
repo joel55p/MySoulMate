@@ -1,0 +1,668 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="questionnaireApp" class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Complete Your Profile</h1>
+        <p class="text-gray-600">Tell us about your interests and preferences to find your perfect match</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-gray-200 rounded-full h-2 mb-8">
+        <div id="progressBar" class="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full transition-all duration-300" 
+             style="width: 0%"></div>
+    </div>
+
+    <!-- Form -->
+    <form id="questionnaireForm" class="space-y-8">
+        
+        <!-- Music Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎵 Music Preferences</h2>
+            <p class="text-gray-600 mb-4">Select up to 3 music genres you enjoy (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.music %}
+                    {% for genre in options.music %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="music" 
+                                   value="{{ genre.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                                   onchange="limitSelection('music', 3); updateProgress();">
+                            <span class="text-sm">{{ genre.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Entertainment Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎬 Entertainment</h2>
+            <p class="text-gray-600 mb-4">Select up to 3 entertainment genres you prefer (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.entertainment %}
+                    {% for genre in options.entertainment %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="entertainment" 
+                                   value="{{ genre.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                                   onchange="limitSelection('entertainment', 3); updateProgress();">
+                            <span class="text-sm">{{ genre.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sports Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🏃‍♂️ Sports & Activities</h2>
+            <p class="text-gray-600 mb-4">Select up to 4 activities you practice or follow (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.sports %}
+                    {% for sport in options.sports %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="sports" 
+                                   value="{{ sport.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                                   onchange="limitSelection('sports', 4); updateProgress();">
+                            <span class="text-sm">{{ sport.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Hobbies Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎨 Hobbies & Interests</h2>
+            <p class="text-gray-600 mb-4">Select up to 4 hobbies you enjoy (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.hobbies %}
+                    {% for hobby in options.hobbies %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="hobbies" 
+                                   value="{{ hobby.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                                   onchange="limitSelection('hobbies', 4); updateProgress();">
+                            <span class="text-sm">{{ hobby.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Relationship Values -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">💝 What do you value most in a relationship?</h2>
+            
+            <div class="space-y-3">
+                {% if options.relationship_values %}
+                    {% for value in options.relationship_values %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="relationship_values" 
+                                   value="{{ value.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                                   onchange="updateProgress();">
+                            <span>{{ value.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Weekend Preferences -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🏖️ How do you prefer to spend an ideal weekend?</h2>
+            
+            <div class="space-y-3">
+                {% if options.weekend_preferences %}
+                    {% for preference in options.weekend_preferences %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="weekend_preferences" 
+                                   value="{{ preference.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                                   onchange="updateProgress();">
+                            <span>{{ preference.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Conversation Types -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">💬 What type of conversations do you enjoy most?</h2>
+            
+            <div class="space-y-3">
+                {% if options.conversation_types %}
+                    {% for type in options.conversation_types %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="conversation_types" 
+                                   value="{{ type.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                                   onchange="updateProgress();">
+                            <span>{{ type.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Social Style -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">👥 How would you describe your social life?</h2>
+            
+            <div class="space-y-3">
+                {% if options.social_style %}
+                    {% for style in options.social_style %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="social_style" 
+                                   value="{{ style.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                                   onchange="updateProgress();">
+                            <span>{{ style.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Relationship Type -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">❤️ What are you looking for in a relationship?</h2>
+            
+            <div class="space-y-3">
+                {% if options.relationship_type %}
+                    {% for type in options.relationship_type %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="relationship_type" 
+                                   value="{{ type.name }}"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                                   onchange="updateProgress();">
+                            <span>{{ type.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" 
+                    id="submitBtn"
+                    disabled
+                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span id="submitText">Complete Profile</span>
+            </button>
+            
+            <p class="text-sm text-gray-500 mt-4">
+                All fields are required to complete your profile
+            </p>
+        </div>
+    </form>
+</div>
+
+<script>
+let submitting = false;
+
+// Initialize form validation
+document.addEventListener('DOMContentLoaded', function() {
+    updateProgress();
+    
+    document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitQuestionnaire();
+    });
+});
+
+function limitSelection(category, max) {
+    const checkboxes = document.querySelectorAll(`input[name="${category}"]:checked`);
+    if (checkboxes.length > max) {
+        // Uncheck the first one to maintain the limit
+        checkboxes[0].checked = false;
+    }
+}
+
+function updateProgress() {
+    let completed = 0;
+    const total = 9;
+    
+    // Check each category
+    if (document.querySelectorAll('input[name="music"]:checked').length > 0) completed++;
+    if (document.querySelectorAll('input[name="entertainment"]:checked').length > 0) completed++;
+    if (document.querySelectorAll('input[name="sports"]:checked').length > 0) completed++;
+    if (document.querySelectorAll('input[name="hobbies"]:checked').length > 0) completed++;
+    if (document.querySelector('input[name="relationship_values"]:checked')) completed++;
+    if (document.querySelector('input[name="weekend_preferences"]:checked')) completed++;
+    if (document.querySelector('input[name="conversation_types"]:checked')) completed++;
+    if (document.querySelector('input[name="social_style"]:checked')) completed++;
+    if (document.querySelector('input[name="relationship_type"]:checked')) completed++;
+    
+    const progress = (completed / total) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+    
+    // Enable/disable submit button
+    const submitBtn = document.getElementById('submitBtn');
+    if (completed === total && !submitting) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+}
+
+function getFormAnswers() {
+    const answers = {};
+    
+    // Get checkbox selections
+    ['music', 'entertainment', 'sports', 'hobbies'].forEach(category => {
+        const selected = [];
+        document.querySelectorAll(`input[name="${category}"]:checked`).forEach(checkbox => {
+            selected.push(checkbox.value);
+        });
+        answers[category] = selected;
+    });
+    
+    // Get radio selections
+    ['relationship_values', 'weekend_preferences', 'conversation_types', 'social_style', 'relationship_type'].forEach(category => {
+        const selected = document.querySelector(`input[name="${category}"]:checked`);
+        answers[category] = selected ? selected.value : '';
+    });
+    
+    return answers;
+}
+
+function submitQuestionnaire() {
+    if (submitting) return;
+    
+    const answers = getFormAnswers();
+    
+    // Validate all fields are filled
+    let isValid = true;
+    for (const [key, value] of Object.entries(answers)) {
+        if (Array.isArray(value) && value.length === 0) {
+            isValid = false;
+            break;
+        }
+        if (!Array.isArray(value) && !value) {
+            isValid = false;
+            break;
+        }
+    }
+    
+    if (!isValid) {
+        alert('Please complete all sections of the questionnaire.');
+        return;
+    }
+    
+    submitting = true;
+    document.getElementById('submitText').textContent = 'Saving...';
+    document.getElementById('submitBtn').disabled = true;
+    
+    fetch('/questionnaire/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answers: answers })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = data.redirect;
+        } else {
+            alert('Error: ' + data.error);
+            submitting = false;
+            document.getElementById('submitText').textContent = 'Complete Profile';
+            updateProgress();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+        submitting = false;
+        document.getElementById('submitText').textContent = 'Complete Profile';
+        updateProgress();
+    });
+}
+
+// Password confirmation validation for register page
+if (document.getElementById('confirm_password')) {
+    document.getElementById('confirm_password').addEventListener('input', function() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = this.value;
+        
+        if (password !== confirmPassword && confirmPassword !== '') {
+            this.setCustomValidity('Passwords do not match');
+            this.style.borderColor = '#ef4444';
+        } else {
+            this.setCustomValidity('');
+            this.style.borderColor = '';
+        }
+    });
+}
+</script>
+{% endblock %}{% extends "base.html" %}
+
+{% block title %}Questionnaire - MySoulMate{% endblock %}
+
+{% block content %}
+<div x-data="questionnaireApp()" class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Complete Your Profile</h1>
+        <p class="text-gray-600">Tell us about your interests and preferences to find your perfect match</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-gray-200 rounded-full h-2 mb-8">
+        <div class="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full transition-all duration-300" 
+             :style="'width: ' + progress + '%'"></div>
+    </div>
+
+    <!-- Form -->
+    <form @submit.prevent="submitQuestionnaire()" class="space-y-8">
+        
+        <!-- Music Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎵 Music Preferences</h2>
+            <p class="text-gray-600 mb-4">Select up to 3 music genres you enjoy (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.music %}
+                    {% for genre in options.music %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="music" 
+                                   value="{{ genre.name }}"
+                                   x-model="answers.music"
+                                   @change="limitSelection('music', 3)"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                            <span class="text-sm">{{ genre.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Entertainment Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎬 Entertainment</h2>
+            <p class="text-gray-600 mb-4">Select up to 3 entertainment genres you prefer (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.entertainment %}
+                    {% for genre in options.entertainment %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="entertainment" 
+                                   value="{{ genre.name }}"
+                                   x-model="answers.entertainment"
+                                   @change="limitSelection('entertainment', 3)"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                            <span class="text-sm">{{ genre.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sports Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🏃‍♂️ Sports & Activities</h2>
+            <p class="text-gray-600 mb-4">Select up to 4 activities you practice or follow (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.sports %}
+                    {% for sport in options.sports %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="sports" 
+                                   value="{{ sport.name }}"
+                                   x-model="answers.sports"
+                                   @change="limitSelection('sports', 4)"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                            <span class="text-sm">{{ sport.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Hobbies Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🎨 Hobbies & Interests</h2>
+            <p class="text-gray-600 mb-4">Select up to 4 hobbies you enjoy (Required)</p>
+            
+            <div class="grid md:grid-cols-3 gap-3">
+                {% if options.hobbies %}
+                    {% for hobby in options.hobbies %}
+                        <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" 
+                                   name="hobbies" 
+                                   value="{{ hobby.name }}"
+                                   x-model="answers.hobbies"
+                                   @change="limitSelection('hobbies', 4)"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                            <span class="text-sm">{{ hobby.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Relationship Values -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">💝 What do you value most in a relationship?</h2>
+            
+            <div class="space-y-3">
+                {% if options.relationship_values %}
+                    {% for value in options.relationship_values %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="relationship_values" 
+                                   value="{{ value.name }}"
+                                   x-model="answers.relationship_values"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span>{{ value.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Weekend Preferences -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🏖️ How do you prefer to spend an ideal weekend?</h2>
+            
+            <div class="space-y-3">
+                {% if options.weekend_preferences %}
+                    {% for preference in options.weekend_preferences %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="weekend_preferences" 
+                                   value="{{ preference.name }}"
+                                   x-model="answers.weekend_preferences"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span>{{ preference.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Conversation Types -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">💬 What type of conversations do you enjoy most?</h2>
+            
+            <div class="space-y-3">
+                {% if options.conversation_types %}
+                    {% for type in options.conversation_types %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="conversation_types" 
+                                   value="{{ type.name }}"
+                                   x-model="answers.conversation_types"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span>{{ type.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Social Style -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">👥 How would you describe your social life?</h2>
+            
+            <div class="space-y-3">
+                {% if options.social_style %}
+                    {% for style in options.social_style %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="social_style" 
+                                   value="{{ style.name }}"
+                                   x-model="answers.social_style"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span>{{ style.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Relationship Type -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">❤️ What are you looking for in a relationship?</h2>
+            
+            <div class="space-y-3">
+                {% if options.relationship_type %}
+                    {% for type in options.relationship_type %}
+                        <label class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" 
+                                   name="relationship_type" 
+                                   value="{{ type.name }}"
+                                   x-model="answers.relationship_type"
+                                   class="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500">
+                            <span>{{ type.name }}</span>
+                        </label>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" 
+                    :disabled="!isValid || submitting"
+                    :class="{'opacity-50 cursor-not-allowed': !isValid || submitting}"
+                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition duration-300">
+                <span x-show="!submitting">Complete Profile</span>
+                <span x-show="submitting">Saving...</span>
+            </button>
+            
+            <p class="text-sm text-gray-500 mt-4">
+                All fields are required to complete your profile
+            </p>
+        </div>
+    </form>
+</div>
+
+<script>
+function questionnaireApp() {
+    return {
+        answers: {
+            music: [],
+            entertainment: [],
+            sports: [],
+            hobbies: [],
+            relationship_values: '',
+            weekend_preferences: '',
+            conversation_types: '',
+            social_style: '',
+            relationship_type: ''
+        },
+        submitting: false,
+
+        get progress() {
+            let completed = 0;
+            let total = 9;
+            
+            if (this.answers.music.length > 0) completed++;
+            if (this.answers.entertainment.length > 0) completed++;
+            if (this.answers.sports.length > 0) completed++;
+            if (this.answers.hobbies.length > 0) completed++;
+            if (this.answers.relationship_values) completed++;
+            if (this.answers.weekend_preferences) completed++;
+            if (this.answers.conversation_types) completed++;
+            if (this.answers.social_style) completed++;
+            if (this.answers.relationship_type) completed++;
+            
+            return (completed / total) * 100;
+        },
+
+        get isValid() {
+            return this.answers.music.length > 0 &&
+                   this.answers.entertainment.length > 0 &&
+                   this.answers.sports.length > 0 &&
+                   this.answers.hobbies.length > 0 &&
+                   this.answers.relationship_values &&
+                   this.answers.weekend_preferences &&
+                   this.answers.conversation_types &&
+                   this.answers.social_style &&
+                   this.answers.relationship_type;
+        },
+
+        limitSelection(category, max) {
+            if (this.answers[category].length > max) {
+                this.answers[category] = this.answers[category].slice(0, max);
+            }
+        },
+
+        submitQuestionnaire() {
+            if (!this.isValid) return;
+            
+            this.submitting = true;
+            
+            fetch('/questionnaire/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ answers: this.answers })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert('Error: ' + data.error);
+                    this.submitting = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+                this.submitting = false;
+            });
+        }
+    }
+}
+</script>
+{% endblock %}

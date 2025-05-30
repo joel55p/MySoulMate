@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}MySoulMate - Encuentra tu Alma Gemela{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <!-- Hero Section -->
+    <div class="py-20">
+        <h1 class="text-6xl font-bold text-gray-900 mb-6">
+            Find Your <span class="text-purple-600">Soul</span><span class="text-pink-600">Mate</span>
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Conecta con estudiantes universitarios basándote en intereses reales, personalidad y valores compartidos. 
+            Más allá de la apariencia, encuentra conexiones auténticas.
+        </p>
+        
+        <div class="space-x-4">
+            <a href="{{ url_for('auth.register') }}" 
+               class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition duration-300">
+                Comenzar Ahora
+            </a>
+            <a href="{{ url_for('auth.login') }}" 
+               class="border border-purple-600 text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-50 transition duration-300">
+                Ya tengo cuenta
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-16 bg-white rounded-2xl shadow-lg mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-12">¿Por qué MySoulMate?</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8 px-8">
+            <!-- Feature 1 -->
+            <div class="text-center">
+                <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-brain text-purple-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Matching Inteligente</h3>
+                <p class="text-gray-600">
+                    Algoritmo basado en intereses compartidos, valores y personalidad. 
+                    Encuentra personas que realmente conecten contigo.
+                </p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="text-center">
+                <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-graduate text-pink-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Solo Universitarios</h3>
+                <p class="text-gray-600">
+                    Comunidad exclusiva de estudiantes universitarios. 
+                    Verificación con correo institucional para mayor seguridad.
+                </p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="text-center">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Privacidad Primero</h3>
+                <p class="text-gray-600">
+                    Perfiles anónimos hasta hacer match. Tu foto solo se muestra 
+                    cuando hay interés mutuo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it Works -->
+    <div class="py-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-12">¿Cómo Funciona?</h2>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+            <!-- Step 1 -->
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-purple-400 to-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+                    1
+                </div>
+                <h4 class="font-semibold mb-2">Regístrate</h4>
+                <p class="text-gray-600 text-sm">Con tu correo universitario</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-pink-400 to-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+                    2
+                </div>
+                <h4 class="font-semibold mb-2">Cuestionario</h4>
+                <p class="text-gray-600 text-sm">Comparte tus intereses y valores</p>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-blue-400 to-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+                    3
+                </div>
+                <h4 class="font-semibold mb-2">Descubre</h4>
+                <p class="text-gray-600 text-sm">Ve perfiles compatibles</p>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-green-400 to-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
+                    4
+                </div>
+                <h4 class="font-semibold mb-2">Conecta</h4>
+                <p class="text-gray-600 text-sm">Haz match y conversa</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16 rounded-2xl">
+        <h2 class="text-4xl font-bold mb-4">¿Listo para encontrar tu SoulMate?</h2>
+        <p class="text-xl mb-8 opacity-90">Únete a cientos de estudiantes que ya encontraron conexiones reales</p>
+        <a href="{{ url_for('auth.register') }}" 
+           class="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
+            Crear mi perfil gratis
+        </a>
+    </div>
+</div>
+{% endblock %}
