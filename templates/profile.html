@@ -6,8 +6,8 @@
 <div class="max-w-2xl mx-auto space-y-8">
     <!-- Header -->
     <div class="text-center">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Your Profile</h1>
-        <p class="text-gray-600">Manage your MySoulMate profile</p>
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Tu perfil</h1>
+        <p class="text-gray-600">Gestionar tu perfil de MySoulMate </p>
     </div>
 
     <!-- Profile Card -->
@@ -18,44 +18,44 @@
                 👤
             </div>
             {% if user.show_photo %}
-                <p class="text-green-600 text-sm">✅ Photo visible to matches</p>
+                <p class="text-green-600 text-sm">✅ Foto visible para los matches</p>
             {% else %}
-                <p class="text-gray-600 text-sm">🔒 Photo hidden until match</p>
+                <p class="text-gray-600 text-sm">🔒 Foto no visible hasta match</p>
             {% endif %}
         </div>
 
         <!-- Profile Info -->
         <div class="space-y-6">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
                 <p class="text-lg text-gray-900">{{ user.name }}</p>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Edad</label>
                 <p class="text-lg text-gray-900">{{ user.age }} years old</p>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">University Email</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Correo Universitario</label>
                 <p class="text-lg text-gray-900">{{ user.email }}</p>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">About Me</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Acerca de mi </label>
                 <p class="text-gray-900">{{ user.description }}</p>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Profile Status</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Estatus de Perfil</label>
                 <div class="flex items-center">
                     {% if user.profile_complete %}
                         <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                            ✅ Complete
+                            ✅ Completado
                         </span>
                     {% else %}
                         <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
-                            ⚠️ Incomplete - Complete questionnaire to start matching
+                            ⚠️ Incompleto - Completar Cuestionario para comenzar a matchear.
                         </span>
                     {% endif %}
                 </div>
@@ -65,29 +65,29 @@
 
     <!-- Actions -->
     <div class="bg-white rounded-lg shadow-lg p-6">
-        <h2 class="text-xl font-bold text-gray-900 mb-4">Profile Actions</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Acciones de Perfil</h2>
         
         <div class="space-y-3">
             {% if not user.profile_complete %}
                 <a href="{{ url_for('questionnaire.start') }}" 
                    class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-center py-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition duration-300">
-                    <i class="fas fa-clipboard-check mr-2"></i>Complete Questionnaire
+                    <i class="fas fa-clipboard-check mr-2"></i>Completar Cuestionario
                 </a>
             {% else %}
                 <button onclick="alert('Feature coming soon! For now, your preferences are saved.')" 
                    class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                    <i class="fas fa-edit mr-2"></i>Update Preferences
+                    <i class="fas fa-edit mr-2"></i>Actualizar Preferencias
                 </button>
             {% endif %}
             
             <button onclick="showEditModal()" 
                     class="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 transition duration-300">
-                <i class="fas fa-user-edit mr-2"></i>Edit Profile Info
+                <i class="fas fa-user-edit mr-2"></i>Editar Perfil
             </button>
             
             <button onclick="confirmDeleteAccount()" 
                     class="w-full border border-red-300 text-red-600 py-3 rounded-lg hover:bg-red-50 transition duration-300">
-                <i class="fas fa-trash-alt mr-2"></i>Delete Account
+                <i class="fas fa-trash-alt mr-2"></i>Eliminar Cuenta
             </button>
         </div>
     </div>
@@ -107,7 +107,7 @@
                 <div class="text-2xl font-bold text-pink-600">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="text-sm text-gray-600 mt-1">Start Discovering</div>
+                <div class="text-sm text-gray-600 mt-1">Comenzar a Descrubrir</div>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
     <div class="text-center">
         <a href="{{ url_for('main.dashboard') }}" 
            class="text-purple-600 hover:text-purple-800 font-medium">
-            <i class="fas fa-arrow-left mr-1"></i> Back to Dashboard
+            <i class="fas fa-arrow-left mr-1"></i> Regresar a  Dashboard
         </a>
     </div>
 </div>
@@ -124,23 +124,23 @@
 <!-- Edit Profile Modal (Hidden by default) -->
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white rounded-lg p-8 max-w-md mx-4">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Edit Profile</h2>
-        <p class="text-gray-600 mb-6">Profile editing is coming soon! For now, your information is saved from registration.</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Editar Perfil </h2>
+        <p class="text-gray-600 mb-6">La Edicion de perfil llegara pronto! Por ahora, tu información se guardo cuando te registraste.</p>
         
         <div class="space-y-4 mb-6">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
                 <input type="text" value="{{ user.name }}" disabled class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                 <textarea disabled class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100" rows="3">{{ user.description }}</textarea>
             </div>
         </div>
         
         <button onclick="hideEditModal()" 
                 class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-300">
-            Close
+            Cerrar
         </button>
     </div>
 </div>

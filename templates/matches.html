@@ -6,24 +6,24 @@
 <div id="matchApp" class="space-y-6">
     <!-- Header -->
     <div class="text-center">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Discover Your Match</h1>
-        <p class="text-gray-600">Swipe through profiles that match your interests</p>
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Descubre tu Match</h1>
+        <p class="text-gray-600">Desliza por perfiles que hagan Match con tus intereses</p>
     </div>
 
     <!-- Loading State -->
     <div id="loading" class="text-center py-16" style="display: none;">
         <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto"></div>
-        <p class="mt-4 text-gray-600">Finding your perfect matches...</p>
+        <p class="mt-4 text-gray-600">Encontrando tus matches perfectos...</p>
     </div>
 
     <!-- No Matches -->
     <div id="noMatches" class="text-center py-16" style="display: none;">
         <div class="text-6xl mb-4">💔</div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">No matches found</h2>
-        <p class="text-gray-600 mb-8">We couldn't find anyone with similar interests right now. Check back later!</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">No se encontraron matches</h2>
+        <p class="text-gray-600 mb-8">No pudimos encontrar a nadie con intereses similares. Vuelve a intentarlo mas tarde !</p>
         <a href="{{ url_for('main.dashboard') }}" 
            class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300">
-            Back to Dashboard
+            Regresar a  Dashboard
         </a>
     </div>
 
@@ -35,7 +35,7 @@
     <!-- Progress Indicator -->
     <div id="progressIndicator" class="text-center" style="display: none;">
         <p class="text-gray-600">
-            <span id="currentProgress">1</span> of <span id="totalProgress">0</span>
+            <span id="currentProgress">1</span> de <span id="totalProgress">0</span>
         </p>
     </div>
 </div>
@@ -44,17 +44,17 @@
 <div id="matchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
     <div class="bg-white rounded-2xl p-8 max-w-sm mx-4 text-center">
         <div class="text-6xl mb-4">🎉</div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">It's a Match!</h2>
-        <p class="text-gray-600 mb-6">You both liked each other. Start a conversation!</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Es un Match!</h2>
+        <p class="text-gray-600 mb-6">Los dos se han dado me gusta. Empieza una conversación!</p>
         
         <div class="space-y-3">
             <button onclick="goToMatches()" 
                     class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition duration-300">
-                View All Matches
+                Ver todas las  Matches
             </button>
             <button onclick="closeMatchModal()" 
                     class="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 transition duration-300">
-                Keep Swiping
+                Seguir Descubriendo
             </button>
         </div>
     </div>
