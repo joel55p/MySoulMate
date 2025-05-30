@@ -1,37 +1,109 @@
 # app/questionnaire.py - Questionnaire Blueprint
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
-from app.models import QuestionnaireOptions
 
 # Create blueprint
 bp = Blueprint('questionnaire', __name__)
+
+def get_static_options():
+    """Return static questionnaire options for testing"""
+    return {
+        'music': [
+            {'name': 'Rock', 'id': 'rock'},
+            {'name': 'Pop', 'id': 'pop'},
+            {'name': 'Jazz', 'id': 'jazz'},
+            {'name': 'Classical', 'id': 'classical'},
+            {'name': 'Electronic', 'id': 'electronic'},
+            {'name': 'Reggaeton', 'id': 'reggaeton'},
+            {'name': 'Country', 'id': 'country'},
+            {'name': 'R&B', 'id': 'rnb'},
+            {'name': 'Metal', 'id': 'metal'}
+        ],
+        'entertainment': [
+            {'name': 'Action Movies', 'id': 'action'},
+            {'name': 'Comedy', 'id': 'comedy'},
+            {'name': 'Drama', 'id': 'drama'},
+            {'name': 'Sci-Fi', 'id': 'scifi'},
+            {'name': 'Romance', 'id': 'romance'},
+            {'name': 'Documentary', 'id': 'documentary'},
+            {'name': 'Anime', 'id': 'anime'},
+            {'name': 'Horror', 'id': 'horror'},
+            {'name': 'Thriller', 'id': 'thriller'}
+        ],
+        'sports': [
+            {'name': 'Football', 'id': 'football'},
+            {'name': 'Basketball', 'id': 'basketball'},
+            {'name': 'Tennis', 'id': 'tennis'},
+            {'name': 'Swimming', 'id': 'swimming'},
+            {'name': 'Running', 'id': 'running'},
+            {'name': 'Gym', 'id': 'gym'},
+            {'name': 'Yoga', 'id': 'yoga'},
+            {'name': 'Cycling', 'id': 'cycling'},
+            {'name': 'Volleyball', 'id': 'volleyball'}
+        ],
+        'hobbies': [
+            {'name': 'Reading', 'id': 'reading'},
+            {'name': 'Gaming', 'id': 'gaming'},
+            {'name': 'Cooking', 'id': 'cooking'},
+            {'name': 'Photography', 'id': 'photography'},
+            {'name': 'Traveling', 'id': 'traveling'},
+            {'name': 'Art', 'id': 'art'},
+            {'name': 'Music', 'id': 'music'},
+            {'name': 'Dancing', 'id': 'dancing'},
+            {'name': 'Writing', 'id': 'writing'}
+        ],
+        'relationship_values': [
+            {'name': 'Trust and Honesty', 'id': 'trust'},
+            {'name': 'Communication', 'id': 'communication'},
+            {'name': 'Shared Interests', 'id': 'shared_interests'},
+            {'name': 'Independence', 'id': 'independence'},
+            {'name': 'Emotional Support', 'id': 'emotional_support'}
+        ],
+        'weekend_preferences': [
+            {'name': 'Outdoor Adventures', 'id': 'outdoor'},
+            {'name': 'Relaxing at Home', 'id': 'home'},
+            {'name': 'Social Events', 'id': 'social'},
+            {'name': 'Cultural Activities', 'id': 'cultural'},
+            {'name': 'Sports and Exercise', 'id': 'sports'}
+        ],
+        'conversation_types': [
+            {'name': 'Deep Philosophical', 'id': 'philosophical'},
+            {'name': 'Light and Fun', 'id': 'fun'},
+            {'name': 'Intellectual Debates', 'id': 'intellectual'},
+            {'name': 'Emotional Sharing', 'id': 'emotional'},
+            {'name': 'Practical Everyday', 'id': 'practical'}
+        ],
+        'social_style': [
+            {'name': 'Very Social Butterfly', 'id': 'very_social'},
+            {'name': 'Selective Socializer', 'id': 'selective'},
+            {'name': 'Introverted', 'id': 'introverted'},
+            {'name': 'Balanced', 'id': 'balanced'}
+        ],
+        'relationship_type': [
+            {'name': 'Serious Long-term', 'id': 'serious'},
+            {'name': 'Casual Dating', 'id': 'casual'},
+            {'name': 'Friendship First', 'id': 'friendship'},
+            {'name': 'Open to Possibilities', 'id': 'open'}
+        ]
+    }
 
 @bp.route('/start')
 @login_required
 def start():
     """Start questionnaire route"""
     try:
-        print("Loading questionnaire options...")
-        options = QuestionnaireOptions.get_all_options()
-        print(f"Successfully loaded {len(options)} categories")
+        # Use static data for now
+        options = get_static_options()
         return render_template('questionnaire.html', options=options)
+        
     except Exception as e:
-        print(f"Error loading questionnaire: {e}")
+        # Log the actual error
+        print(f"Error in questionnaire start: {type(e).__name__}: {str(e)}")
         import traceback
         traceback.print_exc()
         
-        # Return a simple error page instead of redirecting
-        return f"""
-        <html>
-        <head><title>Questionnaire Error</title></head>
-        <body>
-            <h1>Questionnaire Loading Error</h1>
-            <p>There was an error loading the questionnaire options.</p>
-            <p>Error: {str(e)}</p>
-            <a href="/dashboard">Back to Dashboard</a>
-        </body>
-        </html>
-        """, 500
+        flash('Error loading questionnaire. Please try again.', 'error')
+        return redirect(url_for('main.dashboard'))
 
 @bp.route('/submit', methods=['POST'])
 @login_required
@@ -65,7 +137,7 @@ def submit():
 def api_options():
     """API endpoint to get questionnaire options"""
     try:
-        options = QuestionnaireOptions.get_all_options()
+        options = get_static_options()
         return jsonify(options)
     except Exception as e:
         print(f"API options error: {e}")

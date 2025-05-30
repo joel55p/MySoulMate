@@ -1,52 +1,145 @@
 {% extends "base.html" %}
 
-{% block title %}Login - MySoulMate{% endblock %}
+{% block title %}Iniciar Sesión - MySoulMate{% endblock %}
 
 {% block content %}
-<div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
-    <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Welcome Back!</h2>
-        <p class="text-gray-600 mt-2">Sign in to continue your journey</p>
+<div class="max-w-md mx-auto">
+    <!-- Header Card -->
+    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 text-white rounded-t-2xl p-8 shadow-2xl">
+        <div class="text-center">
+            <div class="text-5xl mb-4">🔐</div>
+            <h2 class="text-3xl font-bold mb-2">¡Bienvenido de Vuelta!</h2>
+            <p class="opacity-90">Inicia sesión para continuar tu búsqueda del amor</p>
+        </div>
     </div>
 
-    <form method="POST" action="{{ url_for('auth.login') }}">
-        <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                University Email
-            </label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="your.email@uvg.edu.gt">
+    <!-- Form Card -->
+    <div class="bg-white rounded-b-2xl shadow-2xl p-8">
+        <form method="POST" action="{{ url_for('auth.login') }}" class="space-y-6">
+            <div>
+                <label for="email" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-envelope text-purple-600 mr-2"></i>
+                    Correo Universitario
+                </label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       required
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                       placeholder="tu.email@uvg.edu.gt">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-lock text-pink-600 mr-2"></i>
+                    Contraseña
+                </label>
+                <div class="relative">
+                    <input type="password" 
+                           id="password" 
+                           name="password" 
+                           required
+                           class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                           placeholder="Ingresa tu contraseña">
+                    <button type="button" 
+                            onclick="togglePassword()"
+                            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700">
+                        <i id="passwordIcon" class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" name="remember_me" 
+                           class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                    <span class="text-sm text-gray-700">Recordarme</span>
+                </label>
+                <a href="#" class="text-sm text-purple-600 hover:text-purple-800 font-medium">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-purple-700 hover:via-pink-700 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-600">
+                ¿No tienes una cuenta? 
+                <a href="{{ url_for('auth.register') }}" class="text-purple-600 hover:text-purple-800 font-bold">
+                    Regístrate aquí
+                </a>
+            </p>
         </div>
 
-        <div class="mb-6">
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                Password
-            </label>
-            <input type="password" 
-                   id="password" 
-                   name="password" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="Enter your password">
+        <!-- Quick Stats -->
+        <div class="mt-8 border-t pt-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4 text-center">Únete a la Comunidad</h3>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="flex flex-col items-center">
+                    <div class="text-2xl font-bold text-purple-600">500+</div>
+                    <span class="text-xs text-gray-600">Estudiantes</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-2xl font-bold text-pink-600">150+</div>
+                    <span class="text-xs text-gray-600">Matches</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="text-2xl font-bold text-red-600">25+</div>
+                    <span class="text-xs text-gray-600">Universidades</span>
+                </div>
+            </div>
         </div>
 
-        <button type="submit" 
-                class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-300">
-            Sign In
-        </button>
-    </form>
+        <!-- Social Login (Optional - for future) -->
+        <div class="mt-6">
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-500">O inicia sesión con</span>
+                </div>
+            </div>
 
-    <div class="mt-6 text-center">
-        <p class="text-gray-600">
-            Don't have an account? 
-            <a href="{{ url_for('auth.register') }}" class="text-purple-600 hover:text-purple-800 font-medium">
-                Sign up here
-            </a>
-        </p>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+                <button class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <i class="fab fa-google text-red-500 text-lg"></i>
+                    <span class="ml-2">Google</span>
+                </button>
+                <button class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <i class="fab fa-facebook text-blue-600 text-lg"></i>
+                    <span class="ml-2">Facebook</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const passwordIcon = document.getElementById('passwordIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.classList.remove('fa-eye');
+        passwordIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        passwordIcon.classList.remove('fa-eye-slash');
+        passwordIcon.classList.add('fa-eye');
+    }
+}
+
+// Auto-focus on email field
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('email').focus();
+});
+</script>
 {% endblock %}

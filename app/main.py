@@ -15,7 +15,7 @@ def index():
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    """User dashboard route - NO questionnaire loading here"""
+    """User dashboard route"""
     return render_template('dashboard.html', user=current_user)
 
 @bp.route('/profile')

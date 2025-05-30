@@ -6,53 +6,109 @@
 <div class="space-y-8">
     <!-- Welcome Section -->
     <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg p-8">
-        <h1 class="text-4xl font-bold mb-4">Welcome back, {{ user.name }}! 🎉</h1>
-        <p class="text-xl opacity-90">Ready to discover your perfect match?</p>
+        <h1 class="text-4xl font-bold mb-4">¡Bienvenido de vuelta, {{ user.name }}! 🎉</h1>
+        <p class="text-xl opacity-90">¿Listo para descubrir tu pareja perfecta?</p>
     </div>
+
+    <!-- Status Alert -->
+    {% if not user.profile_complete %}
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
+        <p class="font-bold">⚠️ Perfil Incompleto</p>
+        <p>Completa el cuestionario para empezar a encontrar matches.</p>
+    </div>
+    {% endif %}
 
     <!-- Action Buttons -->
     <div class="bg-white rounded-lg p-8 shadow-lg">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">What would you like to do?</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">¿Qué te gustaría hacer?</h2>
         
         <div class="grid md:grid-cols-2 gap-6">
-            <a href="/questionnaire/start" 
-               class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg hover:from-orange-600 hover:to-orange-700 transition duration-300 text-center">
-                <div class="text-3xl mb-4">📝</div>
-                <h3 class="text-xl font-semibold mb-2">Complete Profile</h3>
-                <p class="opacity-90">Fill out your interests questionnaire</p>
+            {% if not user.profile_complete %}
+                <a href="{{ url_for('questionnaire.start') }}" 
+                   class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-lg hover:from-orange-600 hover:to-orange-700 transition duration-300 text-center transform hover:scale-105">
+                    <div class="text-3xl mb-4">📝</div>
+                    <h3 class="text-xl font-semibold mb-2">Completar Perfil</h3>
+                    <p class="opacity-90">Llena el cuestionario de intereses</p>
+                </a>
+            {% else %}
+                <a href="{{ url_for('questionnaire.start') }}" 
+                   class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 text-center transform hover:scale-105">
+                    <div class="text-3xl mb-4">🔄</div>
+                    <h3 class="text-xl font-semibold mb-2">Actualizar Preferencias</h3>
+                    <p class="opacity-90">Modifica tus intereses</p>
+                </a>
+            {% endif %}
+            
+            <a href="{{ url_for('matches.index') }}" 
+               class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 text-center transform hover:scale-105
+               {% if not user.profile_complete %}opacity-50 cursor-not-allowed{% endif %}"
+               {% if not user.profile_complete %}onclick="alert('Completa tu perfil primero!'); return false;"{% endif %}>
+                <div class="text-3xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold mb-2">Descubrir Personas</h3>
+                <p class="opacity-90">Busca perfiles compatibles</p>
             </a>
             
-            <a href="/matches" 
-               class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-lg hover:from-purple-600 hover:to-purple-700 transition duration-300 text-center">
-                <div class="text-3xl mb-4">🔍</div>
-                <h3 class="text-xl font-semibold mb-2">Discover People</h3>
-                <p class="opacity-90">Browse profiles and find your matches</p>
+            <a href="{{ url_for('matches.my_matches') }}" 
+               class="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-6 rounded-lg hover:from-pink-600 hover:to-pink-700 transition duration-300 text-center transform hover:scale-105">
+                <div class="text-3xl mb-4">💕</div>
+                <h3 class="text-xl font-semibold mb-2">Mis Matches</h3>
+                <p class="opacity-90">Ve tus conexiones</p>
+            </a>
+            
+            <a href="{{ url_for('main.profile') }}" 
+               class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-lg hover:from-green-600 hover:to-green-700 transition duration-300 text-center transform hover:scale-105">
+                <div class="text-3xl mb-4">👤</div>
+                <h3 class="text-xl font-semibold mb-2">Mi Perfil</h3>
+                <p class="opacity-90">Gestiona tu información</p>
             </a>
         </div>
     </div>
 
     <!-- Profile Summary -->
     <div class="bg-white rounded-lg p-8 shadow-lg">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Profile</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Resumen de tu Perfil</h2>
         
         <div class="space-y-4">
-            <div>
-                <span class="font-semibold text-gray-700">Name:</span>
-                <span class="ml-2">{{ user.name }}</span>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-700">Nombre:</span>
+                <span class="text-gray-900">{{ user.name }}</span>
             </div>
-            <div>
-                <span class="font-semibold text-gray-700">Age:</span>
-                <span class="ml-2">{{ user.age }} years old</span>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-700">Edad:</span>
+                <span class="text-gray-900">{{ user.age }} años</span>
             </div>
-            <div>
+            <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Email:</span>
-                <span class="ml-2">{{ user.email }}</span>
+                <span class="text-gray-900">{{ user.email }}</span>
             </div>
-            <div>
-                <span class="font-semibold text-gray-700">About:</span>
-                <p class="ml-2 mt-1 text-gray-600">{{ user.description }}</p>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-700">Estado:</span>
+                {% if user.profile_complete %}
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                        ✅ Listo para hacer match
+                    </span>
+                {% else %}
+                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                        ⚠️ Completa el cuestionario
+                    </span>
+                {% endif %}
+            </div>
+            <div class="mt-4 pt-4 border-t">
+                <span class="font-semibold text-gray-700">Sobre ti:</span>
+                <p class="mt-2 text-gray-600">{{ user.description }}</p>
             </div>
         </div>
+    </div>
+
+    <!-- Quick Tips -->
+    <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">💡 Consejos Rápidos</h3>
+        <ul class="space-y-2 text-gray-700">
+            <li>• Sé honesto en tus respuestas para encontrar mejores matches</li>
+            <li>• Actualiza tus preferencias regularmente</li>
+            <li>• Revisa nuevos perfiles diariamente</li>
+            <li>• ¡No tengas miedo de dar el primer paso!</li>
+        </ul>
     </div>
 </div>
 {% endblock %}

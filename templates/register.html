@@ -1,104 +1,158 @@
 {% extends "base.html" %}
 
-{% block title %}Register - MySoulMate{% endblock %}
+{% block title %}Registro - MySoulMate{% endblock %}
 
 {% block content %}
-<div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
-    <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Join MySoulMate</h2>
-        <p class="text-gray-600 mt-2">Create your account to find your perfect match</p>
+<div class="max-w-lg mx-auto">
+    <!-- Header Card -->
+    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 text-white rounded-t-2xl p-8 shadow-2xl">
+        <div class="text-center">
+            <div class="text-5xl mb-4">💕</div>
+            <h2 class="text-3xl font-bold mb-2">¡Únete a MySoulMate!</h2>
+            <p class="opacity-90">Crea tu cuenta para encontrar tu pareja perfecta</p>
+        </div>
     </div>
 
-    <form method="POST" action="{{ url_for('auth.register') }}">
-        <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-            </label>
-            <input type="text" 
-                   id="name" 
-                   name="name" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="Your full name">
+    <!-- Form Card -->
+    <div class="bg-white rounded-b-2xl shadow-2xl p-8">
+        <form method="POST" action="{{ url_for('auth.register') }}" class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-user text-purple-600 mr-2"></i>
+                    Nombre Completo
+                </label>
+                <input type="text" 
+                       id="name" 
+                       name="name" 
+                       required
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                       placeholder="Tu nombre completo">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-graduation-cap text-blue-600 mr-2"></i>
+                    Correo Universitario
+                </label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       required
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                       placeholder="tu.email@uvg.edu.gt">
+                <p class="text-xs text-gray-500 mt-1 flex items-center">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Debe ser un correo universitario válido
+                </p>
+            </div>
+
+            <div>
+                <label for="age" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-birthday-cake text-pink-600 mr-2"></i>
+                    Edad
+                </label>
+                <input type="number" 
+                       id="age" 
+                       name="age" 
+                       min="18" 
+                       max="99" 
+                       required
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                       placeholder="18">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-comment-alt text-green-600 mr-2"></i>
+                    Acerca de Ti
+                </label>
+                <textarea id="description" 
+                          name="description" 
+                          rows="4" 
+                          required
+                          class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 resize-none"
+                          placeholder="Cuéntanos un poco sobre ti... tus intereses, qué estudias, qué te gusta hacer..."></textarea>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-lock text-red-600 mr-2"></i>
+                    Contraseña
+                </label>
+                <input type="password" 
+                       id="password" 
+                       name="password" 
+                       required
+                       minlength="6"
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                       placeholder="Mínimo 6 caracteres">
+            </div>
+
+            <div>
+                <label for="confirm_password" class="block text-sm font-bold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-lock text-red-600 mr-2"></i>
+                    Confirmar Contraseña
+                </label>
+                <input type="password" 
+                       id="confirm_password" 
+                       name="confirm_password" 
+                       required
+                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                       placeholder="Confirma tu contraseña">
+            </div>
+
+            <!-- Terms and Privacy -->
+            <div class="bg-gray-50 rounded-xl p-4">
+                <label class="flex items-start space-x-3 cursor-pointer">
+                    <input type="checkbox" required 
+                           class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 mt-1">
+                    <span class="text-sm text-gray-700">
+                        Acepto los <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Términos y Condiciones</a> 
+                        y la <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Política de Privacidad</a>
+                    </span>
+                </label>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-purple-700 hover:via-pink-700 hover:to-red-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-heart mr-2"></i>
+                Crear Mi Cuenta
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-600">
+                ¿Ya tienes una cuenta? 
+                <a href="{{ url_for('auth.login') }}" class="text-purple-600 hover:text-purple-800 font-bold">
+                    Inicia sesión aquí
+                </a>
+            </p>
         </div>
 
-        <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                University Email
-            </label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="your.email@uvg.edu.gt">
-            <p class="text-xs text-gray-500 mt-1">Must be a valid university email</p>
+        <!-- Features Preview -->
+        <div class="mt-8 border-t pt-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4 text-center">¿Por qué MySoulMate?</h3>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-brain text-purple-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-700">Matching Inteligente</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-shield-alt text-pink-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-700">100% Seguro</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-700">Solo Universitarios</span>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-4">
-            <label for="age" class="block text-sm font-medium text-gray-700 mb-2">
-                Age
-            </label>
-            <input type="number" 
-                   id="age" 
-                   name="age" 
-                   min="18" 
-                   max="99" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="18">
-        </div>
-
-        <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                About You
-            </label>
-            <textarea id="description" 
-                      name="description" 
-                      rows="3" 
-                      required
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      placeholder="Tell us a bit about yourself..."></textarea>
-        </div>
-
-        <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                Password
-            </label>
-            <input type="password" 
-                   id="password" 
-                   name="password" 
-                   required
-                   minlength="6"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="At least 6 characters">
-        </div>
-
-        <div class="mb-6">
-            <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">
-                Confirm Password
-            </label>
-            <input type="password" 
-                   id="confirm_password" 
-                   name="confirm_password" 
-                   required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                   placeholder="Confirm your password">
-        </div>
-
-        <button type="submit" 
-                class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-300">
-            Create Account
-        </button>
-    </form>
-
-    <div class="mt-6 text-center">
-        <p class="text-gray-600">
-            Already have an account? 
-            <a href="{{ url_for('auth.login') }}" class="text-purple-600 hover:text-purple-800 font-medium">
-                Sign in here
-            </a>
-        </p>
     </div>
 </div>
 
@@ -109,11 +163,28 @@ document.getElementById('confirm_password').addEventListener('input', function()
     const confirmPassword = this.value;
     
     if (password !== confirmPassword && confirmPassword !== '') {
-        this.setCustomValidity('Passwords do not match');
-        this.style.borderColor = '#ef4444';
+        this.setCustomValidity('Las contraseñas no coinciden');
+        this.classList.add('border-red-500');
+        this.classList.remove('border-gray-300');
     } else {
         this.setCustomValidity('');
-        this.style.borderColor = '';
+        this.classList.remove('border-red-500');
+        this.classList.add('border-gray-300');
+    }
+});
+
+// Real-time validation feedback
+document.getElementById('email').addEventListener('input', function() {
+    const email = this.value;
+    const validDomains = ['uvg.edu.gt', 'usac.edu.gt', 'url.edu.gt', 'unis.edu.gt', 'ufm.edu'];
+    const isValid = validDomains.some(domain => email.endsWith(domain));
+    
+    if (email && !isValid) {
+        this.classList.add('border-red-500');
+        this.classList.remove('border-gray-300');
+    } else {
+        this.classList.remove('border-red-500');
+        this.classList.add('border-gray-300');
     }
 });
 </script>

@@ -19,10 +19,21 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('main.dashboard') }}" class="text-gray-700 hover:text-purple-600">Dashboard</a>
-                        <a href="{{ url_for('matches.index') }}" class="text-gray-700 hover:text-purple-600">Discover</a>
-                        <a href="{{ url_for('matches.my_matches') }}" class="text-gray-700 hover:text-purple-600">My Matches</a>
-                        <a href="{{ url_for('auth.logout') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Logout</a>
+                        <a href="{{ url_for('main.dashboard') }}" class="text-gray-700 hover:text-purple-600">
+                            <i class="fas fa-home mr-1"></i> Panel
+                        </a>
+                        <a href="{{ url_for('matches.index') }}" class="text-gray-700 hover:text-purple-600">
+                            <i class="fas fa-search mr-1"></i> Descubrir
+                        </a>
+                        <a href="{{ url_for('matches.my_matches') }}" class="text-gray-700 hover:text-purple-600">
+                            <i class="fas fa-heart mr-1"></i> Mis Matches
+                        </a>
+                        <a href="{{ url_for('main.profile') }}" class="text-gray-700 hover:text-purple-600">
+                            <i class="fas fa-user mr-1"></i> {{ current_user.name }}
+                        </a>
+                        <a href="{{ url_for('auth.logout') }}" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Salir
+                        </a>
                     {% else %}
                         <a href="{{ url_for('auth.login') }}" class="text-gray-700 hover:text-purple-600">Login</a>
                         <a href="{{ url_for('auth.register') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Sign Up</a>
